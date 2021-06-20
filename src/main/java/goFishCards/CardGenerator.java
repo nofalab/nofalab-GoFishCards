@@ -28,14 +28,14 @@ public class CardGenerator {
     
     public Card[] newDeck() {
     for (int i=0; i<deck.length; i++)
-            if (i <= 13) 
-                deck[i] = new Card(Value.values()[randomNum(13)],Suit.values()[0]);
-            else if (i <= 26)
-                deck[i] = new Card(Value.values()[randomNum(13)],Suit.values()[1]);
-            else if (i <= 39)
-                deck[i] = new Card(Value.values()[randomNum(13)],Suit.values()[2]);
-            else if (i <= 52)
-                deck[i] = new Card(Value.values()[randomNum(13)],Suit.values()[3]);
+            if (i < 13) 
+                deck[i] = new Card(Value.values()[i],Suit.values()[0]);
+            else if (i < 26)
+                deck[i] = new Card(Value.values()[i-13],Suit.values()[1]);
+            else if (i < 39)
+                deck[i] = new Card(Value.values()[i-26],Suit.values()[2]);
+            else if (i < 52)
+                deck[i] = new Card(Value.values()[i-39],Suit.values()[3]);
         return deck;
 }
     public List<Card> shuffle(Card[] deck){
