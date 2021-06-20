@@ -6,6 +6,7 @@
 package goFishCards;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.util.Scanner;
 /**
@@ -17,9 +18,12 @@ public class PlayGame {
         CardGenerator c = new CardGenerator(); // and everything
         
         Scanner in = new Scanner(System.in);
-        Card[] deck = c.newDeck();
-        List<Card> shuffled = new ArrayList<>(); 
-        shuffled = c.shuffle(deck);
+        c.newDeck();
+        c.shuffle();
+        for (int i=0; i<c.getShuffledDeck().size(); i++)
+        System.out.println(c.getShuffledDeck().get(i));
+        
+        
         //for (int i=0; i<shuffled.size(); i++)
         //System.out.println(i+1 + ": " + shuffled.get(i));
         

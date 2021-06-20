@@ -7,6 +7,7 @@ package goFishCards;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
 import java.util.Random;
 
@@ -16,9 +17,10 @@ import java.util.Random;
  */
 public class CardGenerator {
     
-    Card[] hand = new Card[7];
-    Card[] deck = new Card[52];
-    
+    private Card[] hand = new Card[7];
+    private Card[] deck = new Card[52];
+    private List<Card> newDeckOfCards = new ArrayList<Card>();
+    private List<Card> shuffledDeck = new ArrayList<Card>();
     
     public int randomNum(int max) {
         Random r = new Random();
@@ -26,34 +28,31 @@ public class CardGenerator {
         return n;
     }
     
-    public Card[] newDeck() {
+    public void newDeck() {
     for (int i=0; i<deck.length; i++)
             if (i < 13) 
-                deck[i] = new Card(Value.values()[i],Suit.values()[0]);
+                newDeckOfCards.add(i, new Card(Value.values()[i],Suit.values()[0]));
             else if (i < 26)
-                deck[i] = new Card(Value.values()[i-13],Suit.values()[1]);
+                newDeckOfCards.add(i, new Card(Value.values()[i-13],Suit.values()[1]));
             else if (i < 39)
-                deck[i] = new Card(Value.values()[i-26],Suit.values()[2]);
+                newDeckOfCards.add(i, new Card(Value.values()[i-26],Suit.values()[2]));
             else if (i < 52)
-                deck[i] = new Card(Value.values()[i-39],Suit.values()[3]);
-        return deck;
+                newDeckOfCards.add(i, new Card(Value.values()[i-39],Suit.values()[3]));
+        
 }
-    public List<Card> shuffle(Card[] deck){
-        List<Card> shuffled = new ArrayList<Card>();
-        shuffled.addAll(Arrays.asList(deck));
-        Random r = new Random();
-        for (int i=shuffled.size(), j=0; i >= 1; i--,j++) {
-            int randomIndex = r.nextInt(i);
-            Card fisher = shuffled.get(randomIndex);
-            shuffled.remove(randomIndex);
-            shuffled.add(shuffled.size()-j,fisher); 
-        }
-        return shuffled;
+    public void shuffle() { // Fisher–Yates shuffle
+        shuffledDeck.addAll(newDeckOfCards);
+        Random r = new Random(); 
+        for (int i=shuffledDeck.size(); i >= 1; i--) { 
+            int randomIndex = r.nextInt(i);  
+            Collections.swap(shuffledDeck, randomIndex, i-1); 
+        }                                                    
     }
+    
     public List<Card> newHand(List<Card> shuffled) {
         Random r = new Random();
         List<Card> newHand = new ArrayList<Card>(7);
-        for (int i=0; i<=newHand.size(); i++){
+        for (int i=0; i<newHand.size(); i++){
             newHand.add(i,shuffled.get(i));
             shuffled.remove(i);
         }
@@ -65,6 +64,12 @@ public class CardGenerator {
         shuffled.remove(0);
         return c;
         
+    }
+    
+    public List<Card> getShuffledDeck(){
+        return this.shuffledDeck;
+        
+            
     }
     
 }
