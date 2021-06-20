@@ -39,7 +39,6 @@ public class CardGame {
             pList[i] = new Player(i + 1);
             System.out.printf("PLAYER %d ENTER NAME: ",i + 1);
             pList[i].setpName(input.next());
-            System.out.println(pList[i].getpName() + " " + pList[i].getpNum());
             for(int x = 0; x < HAND_SIZE; x++){
                 //Get random card from deck, get its value and suit, then remove it
                 
