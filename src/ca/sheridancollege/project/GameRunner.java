@@ -29,20 +29,29 @@ public class GameRunner {
         playersAdding(sc, numOfPlayers, newFishGame);
         
         new GroupOfCardsFish(SIZE_FISH);
-        
+        new CardsOnGround(0);
         ArrayList<Card> deck = GroupOfCardsFish.getDeck();
         ArrayList<Player> players = newFishGame.getPlayers();
         players.forEach(eachPlayer -> {
             eachPlayer.playerDeal(numOfCards);
+            ((GoFishPlayer)eachPlayer).checkWinCombinations();
         });
         
-        while (!deck.isEmpty()){
-            players.forEach(eachPlayer -> {
-            eachPlayer.play(newFishGame);
-            });
+         newFishGame.getPlayers().forEach(eachPlayer -> {
+            System.out.println(eachPlayer);
+            System.out.println(((GoFishPlayer)eachPlayer).getCardsInHand().getCards());
+
+        });
+        
+            for (Player eachPlayer: players){
+            eachPlayer.play(newFishGame, sc);
+            ((GoFishPlayer)eachPlayer).checkWinCombinations();
+               System.out.println("wins are " + ((GoFishPlayer)eachPlayer).getWinComb());
+
+            }
             
             
-        }
+        
         
         
          
@@ -55,7 +64,7 @@ public class GameRunner {
         
         newFishGame.getPlayers().forEach(eachPlayer -> {
             System.out.println(eachPlayer);
-            System.out.println(((GoFishPlayer)eachPlayer).getCardsInHand().getCards());
+            System.out.println((((GoFishPlayer)eachPlayer).getCardsInHand().getCards()).size() +" "+ ((GoFishPlayer)eachPlayer).getCardsInHand().getCards());
 
         });
                

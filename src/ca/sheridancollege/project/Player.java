@@ -5,6 +5,8 @@
  */
 package ca.sheridancollege.project;
 
+import java.util.Scanner;
+
 /**
  * A class that models each Player in the game. Players have an identifier, which should be unique.
  *
@@ -47,7 +49,7 @@ public abstract class Player {
      * The method to be overridden when you subclass the Player class with your specific type of Player and filled in
      * with logic to play your game.
      */
-    public abstract void play(Game newFishGame);
+    public abstract void play(Game newFishGame, Scanner sc);
     
     public abstract String toString();
 
