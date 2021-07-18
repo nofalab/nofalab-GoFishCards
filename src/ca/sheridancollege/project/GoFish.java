@@ -5,6 +5,7 @@
  */
 package ca.sheridancollege.project;
 
+
 /**
  *
  * @author abdal
@@ -14,7 +15,7 @@ public class GoFish extends Game{
     public GoFish (String name){
         super(name);
     }
-    
+
     @Override
     public void play(){
        

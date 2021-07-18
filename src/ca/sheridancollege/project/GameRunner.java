@@ -37,29 +37,54 @@ public class GameRunner {
             ((GoFishPlayer)eachPlayer).checkWinCombinations();
         });
         
+        
          newFishGame.getPlayers().forEach(eachPlayer -> {
             System.out.println(eachPlayer);
             System.out.println(((GoFishPlayer)eachPlayer).getCardsInHand().getCards());
 
         });
+         
+         //TESTING PURPOSES
+        int o = 1;
+        for (Card eachCard: GroupOfCardsFish.getDeck()){
+            System.out.println(o++ + " "+ eachCard);
+        }
+        int s=1;
         
+        for (Card eachCard: CardsOnGround.getCardsOnGround()){
+                        System.out.println(s++ + " "+ eachCard);
+
+        }
+        
+        newFishGame.getPlayers().forEach(eachPlayer -> {
+            System.out.println(eachPlayer);
+            System.out.println((((GoFishPlayer)eachPlayer).getCardsInHand().getCards()).size() +" "+ ((GoFishPlayer)eachPlayer).getCardsInHand().getCards());
+//TESTING UP
+        });
+        int t = 0;
+         while(t !=5){
             for (Player eachPlayer: players){
             eachPlayer.play(newFishGame, sc);
             ((GoFishPlayer)eachPlayer).checkWinCombinations();
                System.out.println("wins are " + ((GoFishPlayer)eachPlayer).getWinComb());
 
             }
-            
-            
-        
-        
+            t++;
+         }     
+                    
         
          
         
         //TESTING PURPOSES
-        int n =1;
+        int n = 1;
         for (Card eachCard: GroupOfCardsFish.getDeck()){
             System.out.println(n++ + " "+ eachCard);
+        }
+        int k=1;
+        
+        for (Card eachCard: CardsOnGround.getCardsOnGround()){
+                        System.out.println(k++ + " "+ eachCard);
+
         }
         
         newFishGame.getPlayers().forEach(eachPlayer -> {

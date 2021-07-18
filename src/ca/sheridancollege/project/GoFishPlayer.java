@@ -80,6 +80,7 @@ class GoFishPlayer extends Player{
     //        }
     //        otherPlayerCards.removeAll(toBeRemoved);
             if (goFish){
+                if (!GroupOfCardsFish.getDeck().isEmpty()){
                 System.out.println("Player " + getName() + " You didn't guess "
                         + "valid number in other player's cards, so you need to"
                         + " press enter to draw from pile");
@@ -94,6 +95,7 @@ class GoFishPlayer extends Player{
                     System.out.println("You're lucky! you picked matching rank "
                             + "from pile, you get to keep your turn.");
                     goFish=false;
+                }
                 }
 
 
@@ -134,36 +136,29 @@ class GoFishPlayer extends Player{
     public void checkWinCombinations(){
        
         ArrayList<Card> thoseCards = this.getCardsInHand().getCards();
-
         ArrayList<Card> tempContainer = new ArrayList<>();
-        boolean stillSearching;
-        do{
-        stillSearching = false;
-        for (int i=0; i<thoseCards.size()-1; i++){
-            tempContainer.removeAll(tempContainer);
-
+        boolean itemsRemoved;
+        int i=0;
+       //here
+       do{
+            itemsRemoved = false;
             for (int j=i+1; j<thoseCards.size(); j++){
                 if (((StandardCard)thoseCards.get(i)).getValue().equals(((StandardCard)thoseCards.get(j)).getValue())){
                     tempContainer.add(thoseCards.get(j));
                 }
             }
+            i++;
             if (tempContainer.size() >= 3){
+                winComb ++;
                 tempContainer.add(thoseCards.get(i));
-                Iterator<Card> iter = thoseCards.iterator();
-            while(iter.hasNext()){
-                Card eachCard = iter.next();
-                if(((StandardCard)eachCard).getValue().equals(((StandardCard)thoseCards.get(i)).getValue())){
-                   CardsOnGround.getCardsOnGround().add(eachCard);
-                   iter.remove();
-                   this.winComb +=1;
-                   stillSearching = true;
-                }
+		thoseCards.removeAll(tempContainer);
+                CardsOnGround.getCardsOnGround().addAll(tempContainer);
+		itemsRemoved = true;
+		i = 0;		
             }
-            }
-            if (stillSearching)
-                break;
-        }
-        }while(stillSearching); 
+            tempContainer.removeAll(tempContainer);
+        }while(i < thoseCards.size()-1);
+        
         
     }
 
