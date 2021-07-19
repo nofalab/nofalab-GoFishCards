@@ -5,6 +5,8 @@
  */
 package ca.sheridancollege.project;
 
+import java.util.ArrayList;
+
 
 /**
  *
@@ -21,7 +23,14 @@ public class GoFish extends Game{
        
     }
     @Override
-    public void declareWinner(){
+    public Player declareWinner(ArrayList<Player> players){
+        Player winner = players.get(0);
+        for (Player eachPlayer: players){
+          if (((GoFishPlayer) eachPlayer).getWinComb() > ((GoFishPlayer) winner).getWinComb()){
+              winner = eachPlayer;
+          }
+        }
+        return winner;
     }
     
     @Override

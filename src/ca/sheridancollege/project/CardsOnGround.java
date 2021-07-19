@@ -24,8 +24,7 @@ public class CardsOnGround extends GroupOfCards{
      */
     @Override
     public void cardGenerator(){
-        this.cardsOnGround = getCards(); 
-
+        
     }
     
     public static ArrayList<Card> getCardsOnGround() {

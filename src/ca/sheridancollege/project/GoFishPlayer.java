@@ -6,6 +6,7 @@
 package ca.sheridancollege.project;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Iterator;
 import java.util.Scanner;
 
@@ -54,6 +55,11 @@ class GoFishPlayer extends Player{
                     + "coressponds to your choice \n1)ACE, 2)TWO, 3)THREE, 4)FOUR, "
                     + "5)FIVE, 6)SIX, 7)SEVEN, 8)EIGHT, 9)NINE, 10)TEN , 11)JACK, "
                     + "12)QUEEN, 13)KING");
+            //ALL CARDS LISTED FOR TESTING REMOVE REMOVE LATER
+            for (Player eachPlayer: players){
+                System.out.println(" CARDS for you to test");
+                System.out.println(((GoFishPlayer) eachPlayer).cardsInHand.getCards());
+            }
             //do validity later of entry
             Value choice = Value.values()[sc.nextInt()-1];
 
@@ -137,28 +143,39 @@ class GoFishPlayer extends Player{
        
         ArrayList<Card> thoseCards = this.getCardsInHand().getCards();
         ArrayList<Card> tempContainer = new ArrayList<>();
-        boolean itemsRemoved;
-        int i=0;
        //here
-       do{
-            itemsRemoved = false;
-            for (int j=i+1; j<thoseCards.size(); j++){
-                if (((StandardCard)thoseCards.get(i)).getValue().equals(((StandardCard)thoseCards.get(j)).getValue())){
-                    tempContainer.add(thoseCards.get(j));
+       ArrayList<Card> thoseCardsCopy = (ArrayList<Card>) thoseCards.clone();
+       int k=0;
+            for (int i=0; i<thoseCardsCopy.size()-1; i++){
+                k=0;
+                boolean repeated = false;
+
+                for (Card eachCardGr: CardsOnGround.getCardsOnGround()){
+                    if (((StandardCard)eachCardGr).getValue().equals(((StandardCard)thoseCardsCopy.get(i)).getValue()) ){
+                        repeated = true;
+                        break;
+                    }
                 }
-            }
-            i++;
-            if (tempContainer.size() >= 3){
+                if (!repeated){
+                    for (int j=i+1; j<thoseCardsCopy.size(); j++){
+                        if (((StandardCard)thoseCardsCopy.get(i)).getValue().equals(((StandardCard)thoseCardsCopy.get(j)).getValue())){
+                            tempContainer.add(thoseCardsCopy.get(j));
+                            k++;
+                        }
+                    }
+                }
+                if (k >= 3){
                 winComb ++;
-                tempContainer.add(thoseCards.get(i));
-		thoseCards.removeAll(tempContainer);
+                tempContainer.add(thoseCardsCopy.get(i));
+                thoseCards.removeAll(tempContainer);
                 CardsOnGround.getCardsOnGround().addAll(tempContainer);
-		itemsRemoved = true;
-		i = 0;		
+                
+
             }
-            tempContainer.removeAll(tempContainer);
-        }while(i < thoseCards.size()-1);
-        
+tempContainer.clear();
+            }
+            
+     
         
     }
 

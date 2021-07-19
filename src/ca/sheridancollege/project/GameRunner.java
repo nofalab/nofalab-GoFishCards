@@ -61,17 +61,24 @@ public class GameRunner {
             System.out.println((((GoFishPlayer)eachPlayer).getCardsInHand().getCards()).size() +" "+ ((GoFishPlayer)eachPlayer).getCardsInHand().getCards());
 //TESTING UP
         });
-        int t = 0;
-         while(t !=5){
+        
+         while(CardsOnGround.getCardsOnGround().size() <52){
             for (Player eachPlayer: players){
+                System.out.println(CardsOnGround.getCardsOnGround().size() + " Cards on ground are currently\n" + CardsOnGround.getCardsOnGround());
             eachPlayer.play(newFishGame, sc);
             ((GoFishPlayer)eachPlayer).checkWinCombinations();
                System.out.println("wins are " + ((GoFishPlayer)eachPlayer).getWinComb());
 
             }
-            t++;
-         }     
-                    
+        
+         }
+        
+        Player winnerIs = newFishGame.declareWinner(players);
+          
+        System.out.println("The big WINNER is : " + winnerIs + "\n with " + ((GoFishPlayer) winnerIs).getWinComb() +" books");
+            
+            
+                           
         
          
         
@@ -83,7 +90,7 @@ public class GameRunner {
         int k=1;
         
         for (Card eachCard: CardsOnGround.getCardsOnGround()){
-                        System.out.println(k++ + " "+ eachCard);
+                        System.out.println(k++ + " GROUND "+ eachCard);
 
         }
         
