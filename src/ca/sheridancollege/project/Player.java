@@ -4,6 +4,7 @@ public class Player extends Card{
     private int pNum;
     private String pName;
     public ArrayList<Card> hand = new ArrayList<Card>();
+    private int books = 0;
 
     public Player(int pNum) {
         this.pNum = pNum;
