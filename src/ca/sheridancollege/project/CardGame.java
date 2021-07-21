@@ -19,6 +19,7 @@ public class CardGame {
 
    
     public static void main(String[] args) {
+        boolean game = true;
         Scanner input = new Scanner(System.in);
         
         ArrayList<Card> deck = DeckGenerator.generateDeck();
@@ -52,6 +53,16 @@ public class CardGame {
                         ,pList[i].hand.get(x).getSuit());
             }
         }
+        //game loop
+        while(game){
+            for(int i = 0; i < players; i++){
+                System.out.printf("%s, what do you wanna do?",pList[i].getpName());
+            }            
+            
+        }
+        
+    }
+    public static void playerAction(){
         
     }
 

@@ -1,4 +1,4 @@
-package ca.sheridancollege.project;
+ package ca.sheridancollege.project;
 
 import java.util.Random;
 import java.util.ArrayList;
