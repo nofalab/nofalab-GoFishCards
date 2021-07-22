@@ -9,11 +9,8 @@ package goFishCards;
  *
  * @author Jake M
  */
-public class Players {
+public enum PlayerSequence {
     
-    public String name;
-    public int playerNumber;
-    public int score;
-    public int correctGuesses;
-    public int totalGuesses;
+   
+    
 }

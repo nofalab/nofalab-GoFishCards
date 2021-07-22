@@ -17,10 +17,10 @@ import java.util.Random;
  */
 public class CardGenerator {
     
-    private Card[] hand = new Card[7];
-    private Card[] deck = new Card[52];
-    private List<Card> newDeckOfCards = new ArrayList<Card>();
-    private List<Card> shuffledDeck = new ArrayList<Card>();
+    private StandardCard[] hand = new StandardCard[7];
+    private StandardCard[] deck = new StandardCard[52];
+    private List<StandardCard> newDeckOfCards = new ArrayList<StandardCard>();
+    private List<StandardCard> shuffledDeck = new ArrayList<StandardCard>();
     
     public int randomNum(int max) {
         Random r = new Random();
@@ -28,16 +28,16 @@ public class CardGenerator {
         return n;
     }
     
-    public void newDeck() {
-    for (int i=0; i<deck.length; i++)
+    public void newStandardDeck() {
+    for (int i=0; i<Value.values().length * Suit.values().length; i++)
             if (i < 13) 
-                newDeckOfCards.add(i, new Card(Value.values()[i],Suit.values()[0]));
+                newDeckOfCards.add(i, new StandardCard(Value.values()[i],Suit.values()[0]));
             else if (i < 26)
-                newDeckOfCards.add(i, new Card(Value.values()[i-13],Suit.values()[1]));
+                newDeckOfCards.add(i, new StandardCard(Value.values()[i-13],Suit.values()[1]));
             else if (i < 39)
-                newDeckOfCards.add(i, new Card(Value.values()[i-26],Suit.values()[2]));
+                newDeckOfCards.add(i, new StandardCard(Value.values()[i-26],Suit.values()[2]));
             else if (i < 52)
-                newDeckOfCards.add(i, new Card(Value.values()[i-39],Suit.values()[3]));
+                newDeckOfCards.add(i, new StandardCard(Value.values()[i-39],Suit.values()[3]));
         
 }
     public void shuffle() { // Fisher–Yates shuffle
@@ -49,9 +49,9 @@ public class CardGenerator {
         }                                                    
     }
     
-    public List<Card> newHand(List<Card> shuffled) {
+    public List<StandardCard> newHand(List<StandardCard> shuffled) {
         Random r = new Random();
-        List<Card> newHand = new ArrayList<Card>(7);
+        List<StandardCard> newHand = new ArrayList<StandardCard>(7);
         for (int i=0; i<newHand.size(); i++){
             newHand.add(i,shuffled.get(i));
             shuffled.remove(i);
@@ -59,14 +59,14 @@ public class CardGenerator {
         return newHand;
     }
     
-    public Card newCard(List<Card> shuffled){
-        Card c = shuffled.get(0);
+    public StandardCard newCard(List<StandardCard> shuffled){
+        StandardCard c = shuffled.get(0);
         shuffled.remove(0);
         return c;
         
     }
     
-    public List<Card> getShuffledDeck(){
+    public List<StandardCard> getShuffledDeck(){
         return this.shuffledDeck;
         
             
