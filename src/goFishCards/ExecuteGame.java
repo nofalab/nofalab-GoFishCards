@@ -16,9 +16,12 @@ import java.util.Scanner;
 public class ExecuteGame {
     public static void main(String[] args) {  // Testing my shuffling methods
         
-        GoFishGame newGame = new GoFishGame();
+        goFishCards.GoFishGame newGame = new goFishCards.GoFishGame();
         newGame.playGame();
-        
+
+
+
+
         
 
 

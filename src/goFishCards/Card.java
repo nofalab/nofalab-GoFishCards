@@ -9,7 +9,7 @@ package goFishCards;
  *
  * @author Jake M
  */
-public class Card {
+public abstract class Card {
     
     
     

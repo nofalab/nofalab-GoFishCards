@@ -15,9 +15,10 @@ public abstract class Game {
 
      
     private String name;
+
+    public Game(){}
     
-    
-    public Game(String name,int numOfPlayers){
+    public Game(String name){
         this.name = name;
         
     }

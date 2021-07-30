@@ -22,6 +22,7 @@ public class StandardDeck {
     
     public StandardDeck(){
         this.DECK_OF_CARDS = new ArrayList();
+        this.r = new Random();
         for (int i = 0; i < SIZE_OF_DECK; i++)
         if (i < 13) 
                 DECK_OF_CARDS.add(i, new StandardCard(Value.values()[i],Suit.values()[0]));
@@ -35,14 +36,17 @@ public class StandardDeck {
     
     public void shuffle(){ 
         for (int i=DECK_OF_CARDS.size(); i >= 1; i--) { 
-            int randomIndex = r.nextInt(i);  
+            int randomIndex = this.r.nextInt(i);
             Collections.swap(DECK_OF_CARDS, randomIndex, i-1); 
     }
     }
         
-    public List<StandardCard> newHand(int numOfCards) {
-        
-        return DECK_OF_CARDS.subList(0, numOfCards-1);
+    public ArrayList<StandardCard> newHand(int numOfCards) {
+        ArrayList<StandardCard> hand = new ArrayList<>();
+        for (int i=0; i<numOfCards; i++) {
+            hand.add(DECK_OF_CARDS.get(0));
+            DECK_OF_CARDS.remove(0); }
+        return hand;
     }
     
     public StandardCard drawCard(){
@@ -58,6 +62,10 @@ public class StandardDeck {
     public void burnTopCard(){
         DECK_OF_CARDS.remove(0);
     }
-    
+
+    public boolean hasCards(){
+        return !DECK_OF_CARDS.isEmpty();
+    }
+
     
 }
