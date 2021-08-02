@@ -7,7 +7,7 @@ package goFishCards;
 
 /**
  *
- * @author Jake M
+ * @author Jacob
  */
 public abstract class Card {
     

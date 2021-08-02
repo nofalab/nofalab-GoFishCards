@@ -10,7 +10,7 @@ import java.util.InputMismatchException;
 import java.util.Scanner;
 
 /**
- * @author Jake M
+ * @author Jacob
  */
 public class GoFishGame extends Game {
 
@@ -39,17 +39,17 @@ public class GoFishGame extends Game {
 
             System.out.println(bodyDot);
 
-            try {
+            try { // sleep between each line
                 Thread.sleep(400);
             } catch (InterruptedException ex) {
                 ex.printStackTrace();
             }
-            finDot += "^_";
-            bodyDot = bodyDot.substring(i + 2) + "^_^_";
+            finDot += "^_"; // adding finDot together
+            bodyDot = bodyDot.substring(i + 2) + "^_^_"; // reducing bodyDot String by 2 char places each iteration
         }
         System.out.println("-----------------------------------------------------------------------------\n");
 
-        while (this.numOfPlayers < 2 || this.numOfPlayers > 7) {
+        while (this.numOfPlayers < 2 || this.numOfPlayers > 7) { // check if number of players entered is between 2-7
             try {
                 System.out.println("Please select the number players 2-7: ");
                 this.numOfPlayers = in.nextInt();
@@ -61,14 +61,13 @@ public class GoFishGame extends Game {
         }
 
         for (int i = 0; i < numOfPlayers; i++) { // Enter player names;
-            String playerName = " ";
+            String playerName;
             System.out.println("Player " + (i + 1) + " name: ");
             playerName = in.nextLine().toUpperCase();
-
             try {
                 this.getPlayerList().add(i, new GoFishPlayer(playerName, i + 1)); // add all player objects to playerList;
             } catch (Exception ex) {
-                System.err.println("*Fatal error Please try again*"); // if player objects fail to create;
+                System.err.println("*Fatal error Please try again*"); // if player objects fail to create for some reason;
             }
         }
 
@@ -96,21 +95,28 @@ public class GoFishGame extends Game {
         } catch (Exception e) {
         }
 
-        String fishBaitstr; // initial string value for the card number (will be parsed into int);
+        String fishBaitstr=" "; // initial string value for the card number (will be parsed into int);
         int fishBait = -1; // initial value to hold for fishBait;
         boolean goFish = false; // check if match is made from another player;
         boolean numCheckHand = false; // check if the card number entered by currentPlayer is actually in the player's hand;
         do {
             do {
+                /* for (int i=0; i<playerList.get(currentPlayer).getCardsInHand().size(); i++) {
+                    playerList.get(currentPlayer).getCardsInHand().remove(i);
+                    i--;
+                } */
+
                 numCheckHand = false;
                 goFish = false;
                 if (playerList.get(currentPlayer).getCardsInHand().isEmpty()) { // if currentPlayer has no cards in hand, will draw a new hand;
+                    playerList.get(currentPlayer).getCardsInHand().clear(); // clear empty hand to fix the IndexOutOfBoundsException;
                     System.out.println("Your hand is empty,  Please draw a new hand from the deck\n");
                     System.out.println("Press enter to draw hand");
+
                     if (numOfPlayers < 5)
-                        playerList.get(currentPlayer).getCardsInHand().addAll(deck.newHand(7));
+                        playerList.get(currentPlayer).setCardsInHand(deck.newHand(7));
                     else
-                        playerList.get(currentPlayer).getCardsInHand().addAll(deck.newHand(5));
+                        playerList.get(currentPlayer).setCardsInHand(deck.newHand(5));
                     try {
                         System.in.read(); // wait for enter;
                     } catch (Exception e) {
@@ -124,17 +130,20 @@ public class GoFishGame extends Game {
                 try {
                     fishBaitstr = in.nextLine();
                     fishBait = Integer.parseInt(fishBaitstr);
+
                 } catch (Exception ex) {
                     System.err.println("*You must enter a number*"); //
                 }
 
 
-                for (int i = 0; i < playerList.get(currentPlayer).getCardsInHand().size(); i++) { // checking if entered card number is actually in the currentPlayer's hand;
+                for (int i = 0; i < playerList.get(currentPlayer).getCardsInHand().size(); i++) { // check if entered card number is actually in the currentPlayer's hand;
                     if (playerList.get(currentPlayer).getCardsInHand().get(i).getValue().ordinal() + 1 == fishBait) {
                         numCheckHand = true; // if found true, if not found will loop back to input;
                         break;
                     }
                 }
+                if (!numCheckHand)
+                    System.err.println("You can only ask for a card currently in your hand");
             } while (!numCheckHand); // loop back to card number input;
 
 
@@ -176,12 +185,18 @@ public class GoFishGame extends Game {
                     } else if (playerList.get(i).getName().equalsIgnoreCase(opponent)) { // opponent name valid ignoring case;
                         opponentMatch = true;  // opponent name is found true, will not loop back to input;
                         for (int m = 0; m < playerList.get(i).getCardsInHand().size(); m++) {  // loop through opponents hand, looking for 'fishBait' card values;
-                            if ((playerList.get(i).getCardsInHand().get(m).getValue().ordinal() + 1) == fishBait) { // if card value.ordinal + 1 == fishBait;
+                             if ((playerList.get(i).getCardsInHand().get(m).getValue().ordinal() + 1) == fishBait) { // if card value.ordinal + 1 == fishBait;
                                 goFish = true;  // will loop for another turn
                                 System.out.println("Match found! " + playerList.get(i).getCardsInHand().get(m).toString() + "\n"); // display card that was found;
                                 playerList.get(currentPlayer).getCardsInHand().add(playerList.get(i).getCardsInHand().get(m)); // add the found card into currentPlayer's hand;
                                 playerList.get(i).getCardsInHand().remove(playerList.get(i).getCardsInHand().get(m)); // delete the card from the opponents hand;
                                 m--;  // because the arraylist shuffles down, check same m position again (if two matching cards sit next to each other);
+                                try { // sleep 1 second
+                                    Thread.sleep(800);
+                                } catch (InterruptedException ex) {
+                                    ex.printStackTrace();
+                                }
+
                             }
                         }
                     }
@@ -192,9 +207,33 @@ public class GoFishGame extends Game {
 
             } while (!opponentMatch); // loop back to opponent name entry;
 
+            if (!goFish) { // if no match was found in opponent's hand;
+                try { // sleep 1.2 seconds
+                    Thread.sleep(1200);
+                } catch (InterruptedException ex) {
+                    ex.printStackTrace();
+                }
+                System.out.println("Match Not found in " + opponent.toUpperCase() + "'s hand\n");
+                System.out.println("You must draw a card: Press enter \n");
+                try { // wait for enter input
+                    System.in.read();
+                } catch (Exception e) {
+                }
+                StandardCard drawCard = deck.drawCard();
+                playerList.get(currentPlayer).getCardsInHand().add(drawCard); // draw top card from deck;
+                System.out.println("*You pick up a card from the deck*");
+                System.out.println(drawCard + "\n");
+                try { // wait 1 second
+                    Thread.sleep(1000);
+                } catch (InterruptedException ex) {
+                    ex.printStackTrace();
+                }
+            }
+
             /* Now check current player's hand for full books (4 matching cards)
               loop will take each card, and compare to every other card looking for 3 other matches;
              */
+
             for (int j = 0; j < playerList.get(currentPlayer).getCardsInHand().size(); j++) {
                 if (setFound)  // if set is found from previous iteration, break from loop because only one book can be made each card guess;
                     break;
@@ -226,53 +265,40 @@ public class GoFishGame extends Game {
                     }
                 }
             }
-
-
-            if (!goFish) { // if no match was found in opponent's hand;
-                try { // sleep 1.2 seconds
-                    Thread.sleep(1200);
-                } catch (InterruptedException ex) {
-                    ex.printStackTrace();
+                if (!goFish) {
+                    System.out.println("Next player's turn! \n");
+                    try { // wait 1.4 seconds
+                        Thread.sleep(800);
+                    } catch (InterruptedException ex) {
+                        ex.printStackTrace();
+                    }
+                    if (currentPlayer == numOfPlayers - 1) { // if current player is the last one in playerList;
+                        currentPlayer = 0; // go to first player in playerList;
+                    } else {
+                        currentPlayer++; // to next player in the playerList;
+                    }
+                    System.out.println("Player " + (currentPlayer + 1) + ": " + playerList.get(currentPlayer).getName() + "'s turn");
+                    System.out.println("Ready Player " + (currentPlayer + 1) + "? (Press enter to start)...");
+                    try {
+                        System.in.read();
+                    } catch (Exception e) {
+                    }
                 }
-                System.out.println("Match Not found in " + opponent.toUpperCase() + "'s hand\n");
-                System.out.println("You must draw a card: Press enter \n");
-                try { // wait for enter input
-                    System.in.read();
-                } catch (Exception e) {
-                }
-                playerList.get(currentPlayer).getCardsInHand().add(deck.drawCard()); // draw top card from deck;
-                System.out.println("*You pick up a card from the deck*");
-                try { // wait 1 second
-                    Thread.sleep(1000);
-                } catch (InterruptedException ex) {
-                    ex.printStackTrace();
-                }
-                System.out.println("Next player's turn! \n");
-                try { // wait 1.4 seconds
-                    Thread.sleep(1200);
-                } catch (InterruptedException ex) {
-                    ex.printStackTrace();
-                }
-                if (currentPlayer == numOfPlayers - 1) { // if current player is the last one in playerList;
-                    currentPlayer = 0; // go to first player in playerList;
-                } else {
-                    currentPlayer++; // to next player in the playerList;
-                }
-                System.out.println("Player " + (currentPlayer + 1) + ": " + playerList.get(currentPlayer).getName() + "'s turn");
-                System.out.println("Ready Player " + (currentPlayer + 1) + "? (Press enter to start)...");
-                try {
-                    System.in.read();
-                } catch (Exception e) {
-                }
-            }
 
         } while (deck.hasCards());
         System.out.println("Game is over \n     The player with the most books wins.");
+        try { // sleep 1.5 seconds
+            Thread.sleep(1500);
+        } catch (InterruptedException ex) {
+            ex.printStackTrace();
+        }
 
         int winner = currentPlayer;
         for (int i = 0; i < playerList.size(); i++) {
-            if (playerList.get(i).getCardMatches().size() >= playerList.get(winner).getCardMatches().size())
+            if (playerList.get(i).getCardMatches().size() > playerList.get(winner).getCardMatches().size())
                 winner = i;
+            else if (playerList.get(i).getCardMatches().size() == playerList.get(winner).getCardMatches().size())
+                winner = currentPlayer;
         }
         System.out.println("the winner of the game is player " + (winner + 1) + ": " + playerList.get(winner).getName());
     }

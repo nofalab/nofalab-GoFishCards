@@ -27,25 +27,25 @@ public class GoFishPlayer extends Player {
 
     public String toString() {
         String cardsInHandDisplay = " ";
-        String matchesInHandDisplay = "\n Books completed: ";
+        String matchesInHandDisplay = "\nBooks completed: ";
         for (int i = 0; i < cardsInHand.size(); i++) {
             if (i%2==0) {
-                cardsInHandDisplay += "(" + (cardsInHand.get(i).getValue().ordinal() + 1) + ") " + cardsInHand.get(i) + " " + "\n";
+                cardsInHandDisplay += "\n" + "(" + (cardsInHand.get(i).getValue().ordinal() + 1) + ") " + cardsInHand.get(i) + " ";
             }
             else
                 cardsInHandDisplay += " " + "(" + (cardsInHand.get(i).getValue().ordinal() + 1) + ") " + cardsInHand.get(i) + ","+ " ";
-
         }
+
         if (!cardMatches.isEmpty()) {
             for (int i = 0; i < cardMatches.size(); i++) {
                 if (i%2==0) {
-                    matchesInHandDisplay += " " + "(" + (cardMatches.get(i).getValue().ordinal() + 1) + ") " + cardMatches.get(i) + ",\n";
+                    matchesInHandDisplay += "\n " + "(" + (cardMatches.get(i).getValue().ordinal() + 1) + ") " + cardMatches.get(i) + ",";
                 }
                 else
                     matchesInHandDisplay += " " + "(" + (cardMatches.get(i).getValue().ordinal() + 1) + ") " + cardMatches.get(i) + ",";
             }
         } else if (cardMatches.isEmpty()) {
-            matchesInHandDisplay = "No books in hand";
+            matchesInHandDisplay = "\nNo books in hand";
         }
         return super.getName() + ": \n\n" + cardsInHandDisplay + "\n" + matchesInHandDisplay;
     }

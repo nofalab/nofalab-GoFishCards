@@ -11,7 +11,7 @@ import java.util.List;
 import java.util.Scanner;
 /**
  *
- * @author Jake M
+ * @author Jacob
  */
 public class ExecuteGame {
     public static void main(String[] args) {  // Testing my shuffling methods

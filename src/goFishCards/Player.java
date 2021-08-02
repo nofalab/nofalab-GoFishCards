@@ -9,7 +9,7 @@ import java.util.ArrayList;
 
 /**
  *
- * @author Jake M
+ * @author Jacob
  */
 public abstract class Player {
       

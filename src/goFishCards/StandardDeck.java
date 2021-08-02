@@ -43,9 +43,18 @@ public class StandardDeck {
         
     public ArrayList<StandardCard> newHand(int numOfCards) {
         ArrayList<StandardCard> hand = new ArrayList<>();
-        for (int i=0; i<numOfCards; i++) {
-            hand.add(DECK_OF_CARDS.get(0));
-            DECK_OF_CARDS.remove(0); }
+        if (DECK_OF_CARDS.size()>=7) {
+            for (int i = 0; i < numOfCards; i++) {
+                hand.add(DECK_OF_CARDS.get(0));
+                DECK_OF_CARDS.remove(0);
+            }
+        }
+        else if (DECK_OF_CARDS.size()>=1) {
+            for (int i = 0; i < DECK_OF_CARDS.size(); i++) {
+                hand.add(DECK_OF_CARDS.get(0));
+                DECK_OF_CARDS.remove(0);
+            }
+        }
         return hand;
     }
     
@@ -67,5 +76,7 @@ public class StandardDeck {
         return !DECK_OF_CARDS.isEmpty();
     }
 
-    
+    public ArrayList<StandardCard> getDeck() {
+        return this.DECK_OF_CARDS;
+    }
 }
