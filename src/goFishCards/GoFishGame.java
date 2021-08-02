@@ -280,6 +280,7 @@ public class GoFishGame extends Game {
 
                 if (!numCheckHand)
                     System.err.println("You can only ask for a card currently in your hand");
+
             } while (!numCheckHand); // loop back to card number input;
 
 
