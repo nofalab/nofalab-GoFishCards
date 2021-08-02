@@ -25,7 +25,6 @@ public class GoFishGame extends Game {
     boolean goFish = false; // check if match is made from another player;
     boolean setFound = false; // boolean to check if a full set is found;
     int matchCount; // number of matches in current player's hand, if reaches '3' full set is found;
-    // if a single card matches with 3 others, that is 4 cards matching in hand;
     int matchIndex1 = 0; // holds the array position of the matching card;
     int matchIndex2 = 0; // holds the array position of the matching card;
     int matchIndex3 = 0; // holds the array position of the matching card;
