@@ -15,11 +15,13 @@ import java.util.Collections;
  * @author dancye
  * @author Paul Bonenfant Jan 2020
  * @author Megha Patel
+ * @author Abdallah Nofal June 28, 2021
+ * 
  */
-public class GroupOfCards {
+public abstract class GroupOfCards {
 
     //The group of cards, stored in an ArrayList
-    private ArrayList<Card> cards;
+    private ArrayList<Card> cards = new ArrayList<>();
     private int size;//the size of the grouping
 
     public GroupOfCards(int size) {
@@ -35,7 +37,7 @@ public class GroupOfCards {
         return cards;
     }
 
-    public void shuffle() {
+    public final void shuffle() {
         Collections.shuffle(cards);
     }
 
@@ -52,5 +54,7 @@ public class GroupOfCards {
     public void setSize(int size) {
         this.size = size;
     }
-
+    public abstract void cardGenerator();
+    
 }//end class
+    
