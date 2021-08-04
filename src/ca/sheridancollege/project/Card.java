@@ -1,7 +1,7 @@
-/**
- * SYST 17796 Project Base code.
- * Students can modify and extend to implement their game.
- * Add your name as an author and the date!
+/*
+//SYST 17796 Project.- Go Fish
+//Deliverable 3
+//Date of submission: August 4, 2021
  */
 package ca.sheridancollege.project;
 
@@ -11,7 +11,8 @@ package ca.sheridancollege.project;
  *
  * @author dancye
  * @author Megha Patel
- * @author Abdallah Nofal June 28, 2021
+ * @modifier Abdallah Nofal, Victor Vieira, Jacob Maltby, Imanuel Chatur
+ * 
 
  */
 public abstract class Card {

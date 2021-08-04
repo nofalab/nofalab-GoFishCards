@@ -1,13 +1,15 @@
 /*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
+//SYST 17796 Project.- Go Fish
+//Deliverable 3
+//Date of submission: August 4, 2021
  */
 package ca.sheridancollege.project;
 
 /**
- *
- * @author meghapatel
+ * An enum to be used as the base Card Value for the standard cards. 
+ * @author Abdallah Nofal, Victor Vieira, Jacob Maltby, Imanuel Chatur
+ * 
+
  */
 public enum Value {
     ACE,TWO,THREE,FOUR,FIVE, SIX,SEVEN,EIGHT,NINE, TEN ,JACK, QUEEN, KING 
