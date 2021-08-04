@@ -5,24 +5,23 @@
  */
 package goFishCards;
 
-import java.util.ArrayList;
 
 /**
- *
  * @author Jacob
  */
 public abstract class Game {
 
-     
+
     private String name;
 
-    public Game(){}
-    
-    public Game(String name){
-        this.name = name;
-        
+    public Game() {
     }
-    
+
+    public Game(String name) {
+        this.name = name;
+
+    }
+
     /**
      * @return the name
      */
@@ -36,8 +35,8 @@ public abstract class Game {
     public void setName(String name) {
         this.name = name;
     }
-    
-    
+
+
     public abstract void playGame();
-    
+
 }

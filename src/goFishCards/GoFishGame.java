@@ -20,10 +20,10 @@ public class GoFishGame extends Game {
     private ArrayList<GoFishPlayer> playerList;
     StandardDeck deck;
     boolean numCheckHand; // check if the card number entered by currentPlayer is actually in the player's hand;
-    String fishBaitstr=" "; // initial string value for the card number (will be parsed into int);
+    String fishBaitstr = " "; // initial string value for the card number (will be parsed into int);
     int fishBait = -1; // initial value to hold for fishBait;
-    boolean goFish = false; // check if match is made from another player;
-    boolean setFound = false; // boolean to check if a full set is found;
+    boolean goFish = false; // check if card match is made;
+    boolean setFound = false; // check if a book set is found;
     int matchCount; // number of matches in current player's hand, if reaches '3' full set is found;
     int matchIndex1 = 0; // holds the array position of the matching card;
     int matchIndex2 = 0; // holds the array position of the matching card;
@@ -37,8 +37,8 @@ public class GoFishGame extends Game {
         this.deck = new StandardDeck();
         this.playerList = new ArrayList<>();
         numOfPlayers = 0;
-
     }
+
     public void openingSequence() {
         System.out.println("Welcome to Go Fish...");
         String finDot = " _";
@@ -96,7 +96,7 @@ public class GoFishGame extends Game {
         }
     }
 
-    public void checkForEmptyHand(){
+    public void checkForEmptyHand() {
         if (playerList.get(currentPlayer).getCardsInHand().isEmpty()) { // if currentPlayer has no cards in hand, will draw a new hand;
             playerList.get(currentPlayer).getCardsInHand().clear(); // clear empty hand to fix the IndexOutOfBoundsException;
             System.out.println("Your hand is empty,  Please draw a new hand from the deck\n");
@@ -133,6 +133,7 @@ public class GoFishGame extends Game {
             }
         }
     }
+
     public void displayOpponents() {
         System.out.print("Here are your opponents: ");
         for (int i = 0; i < playerList.size(); i++) { // Displaying player opponent list;

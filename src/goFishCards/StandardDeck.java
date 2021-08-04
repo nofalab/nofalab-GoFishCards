@@ -11,45 +11,43 @@ import java.util.List;
 import java.util.Random;
 
 /**
- *
  * @author Jake M
  */
 public class StandardDeck {
-    
+
     private final ArrayList<StandardCard> DECK_OF_CARDS;
     private Random r;
-    private final int SIZE_OF_DECK = Value.values().length * Suit.values().length;
-    
-    public StandardDeck(){
+
+    public StandardDeck() {
         this.DECK_OF_CARDS = new ArrayList();
         this.r = new Random();
+        int SIZE_OF_DECK = Value.values().length * Suit.values().length;
         for (int i = 0; i < SIZE_OF_DECK; i++)
-        if (i < 13) 
-                DECK_OF_CARDS.add(i, new StandardCard(Value.values()[i],Suit.values()[0]));
+            if (i < 13)
+                DECK_OF_CARDS.add(i, new StandardCard(Value.values()[i], Suit.values()[0]));
             else if (i < 26)
-                DECK_OF_CARDS.add(i, new StandardCard(Value.values()[i-13],Suit.values()[1]));
+                DECK_OF_CARDS.add(i, new StandardCard(Value.values()[i - 13], Suit.values()[1]));
             else if (i < 39)
-                DECK_OF_CARDS.add(i, new StandardCard(Value.values()[i-26],Suit.values()[2]));
+                DECK_OF_CARDS.add(i, new StandardCard(Value.values()[i - 26], Suit.values()[2]));
             else if (i < 52)
-                DECK_OF_CARDS.add(i, new StandardCard(Value.values()[i-39],Suit.values()[3]));
+                DECK_OF_CARDS.add(i, new StandardCard(Value.values()[i - 39], Suit.values()[3]));
     }
-    
-    public void shuffle(){ 
-        for (int i=DECK_OF_CARDS.size(); i >= 1; i--) { 
+
+    public void shuffle() {
+        for (int i = DECK_OF_CARDS.size(); i >= 1; i--) {
             int randomIndex = this.r.nextInt(i);
-            Collections.swap(DECK_OF_CARDS, randomIndex, i-1); 
+            Collections.swap(DECK_OF_CARDS, randomIndex, i - 1);
+        }
     }
-    }
-        
+
     public ArrayList<StandardCard> newHand(int numOfCards) {
         ArrayList<StandardCard> hand = new ArrayList<>();
-        if (DECK_OF_CARDS.size()>=7) {
+        if (DECK_OF_CARDS.size() >= 7) {
             for (int i = 0; i < numOfCards; i++) {
                 hand.add(DECK_OF_CARDS.get(0));
                 DECK_OF_CARDS.remove(0);
             }
-        }
-        else if (DECK_OF_CARDS.size()>=1) {
+        } else if (DECK_OF_CARDS.size() >= 1) {
             for (int i = 0; i < DECK_OF_CARDS.size(); i++) {
                 hand.add(DECK_OF_CARDS.get(0));
                 DECK_OF_CARDS.remove(0);
@@ -57,22 +55,22 @@ public class StandardDeck {
         }
         return hand;
     }
-    
-    public StandardCard drawCard(){
-            StandardCard topCard = DECK_OF_CARDS.get(0);
-            DECK_OF_CARDS.remove(0);
-            return topCard;
-        }
-        
-    public void addCard(StandardCard c){
+
+    public StandardCard drawCard() {
+        StandardCard topCard = DECK_OF_CARDS.get(0);
+        DECK_OF_CARDS.remove(0);
+        return topCard;
+    }
+
+    public void addCard(StandardCard c) {
         DECK_OF_CARDS.add(c);
     }
-            
-    public void burnTopCard(){
+
+    public void burnTopCard() {
         DECK_OF_CARDS.remove(0);
     }
 
-    public boolean hasCards(){
+    public boolean hasCards() {
         return !DECK_OF_CARDS.isEmpty();
     }
 
