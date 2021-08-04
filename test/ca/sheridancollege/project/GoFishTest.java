@@ -65,6 +65,29 @@ public class GoFishTest {
         // TODO review the generated test code and remove the default call to fail.
         //fail("The test case is a prototype.");
     }
+    
+    @Test
+    public void testNumOfCardsCalculatorBad() {
+        System.out.println("numOfCardsCalculatorBad");
+        int numOfPlayers = 20;
+        int expResult = 0;
+        int result = GoFish.numOfCardsCalculator(numOfPlayers);
+        assertEquals(expResult, result);
+        // TODO review the generated test code and remove the default call to fail.
+        //fail("The test case is a prototype.");
+    }
+
+        @Test
+    public void testNumOfCardsCalculatorBoundary() {
+        System.out.println("numOfCardsCalculatorBoundary");
+        int numOfPlayers = 8;
+        int expResult = 0;
+        int result = GoFish.numOfCardsCalculator(numOfPlayers);
+        assertEquals(expResult, result);
+        // TODO review the generated test code and remove the default call to fail.
+        //fail("The test case is a prototype.");
+    }
+
 
 //    /**
 //     * Test of validatedNumOfPlayers method, of class GoFish.
