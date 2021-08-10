@@ -212,10 +212,11 @@ class GoFishPlayer extends Player{
                 thoseCards.removeAll(tempContainer);
                 CardsOnGround.getCardsOnGroundObj().getCards().addAll(tempContainer);
                 }
-            }
   
             tempContainer.clear();
-            }   
+        }
+    }
+
      
     public int getWinComb(){
         return winComb;

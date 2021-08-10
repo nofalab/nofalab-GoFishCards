@@ -31,8 +31,8 @@ public class GoFish extends Game{
                 + "continue until the end?\ncostumize ? Y/N");
             if ((sc.next().toUpperCase().charAt(0) == 'Y')){
                 System.out.println("Please enter the number of books limit:");
-                booksLimit = GeneUtilities.numValidator(sc, 1, 13);
-                    
+                booksLimit = GeneUtilities.numValidator(sc, 1, 13)*4;
+                  
             } 
         System.out.println("Please enter number of players: ");
         this.numOfPlayers = GeneUtilities.numValidator(sc, 2, 7);
@@ -53,7 +53,6 @@ public class GoFish extends Game{
             return 7;
         return 0;
     }
-    
     
     
      //registering players into game with checking unique names 
@@ -86,14 +85,24 @@ public class GoFish extends Game{
     }
     
     @Override
-    public Player declareWinner(ArrayList<Player> players){
+    public ArrayList<Player> declareWinner(ArrayList<Player> players){
+        ArrayList<Player> winners = new ArrayList<Player>();
         Player winner = players.get(0);
         for (Player eachPlayer: players){
           if (((GoFishPlayer) eachPlayer).getWinComb() > ((GoFishPlayer) winner).getWinComb()){
               winner = eachPlayer;
           }
         }
-        return winner;
+        winners.add(winner);
+        for (Player eachPlayer: players){
+          if (eachPlayer != winner){
+            if (((GoFishPlayer) eachPlayer).getWinComb() == ((GoFishPlayer) winner).getWinComb()){
+              winners.add(eachPlayer);
+            }
+          }
+        }
+        
+        return winners;
     }
     
     @Override

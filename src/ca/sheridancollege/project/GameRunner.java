@@ -26,13 +26,30 @@ public class GameRunner {
         
         ArrayList<Player> players = newFishGame.getPlayers();
                  
-        Player winnerIs = newFishGame.declareWinner(players);
+        ArrayList<Player> winners = newFishGame.declareWinner(players);
+        
+        //if only one winner or tie, multiple players with same score!
+        if (winners.size()==1){
           
         System.out.println("\n******************************************************"
-                + "\nThe WINNER is : player " + winnerIs.getName() + " with "
-                        + ((GoFishPlayer) winnerIs).getWinComb() +" books."
+                + "\nThe WINNER is : player " + winners.get(0).getName() + " with "
+                        + ((GoFishPlayer) winners.get(0)).getWinComb() +" books."
                         + "\n******************************************************"
                         + "\n\nGeneral Statistics:\n\nThe scores for all: \n ");
+        
+        } else {
+            System.out.println("\n******************************************************"
+                + "\nTIE between the following players ");
+                       
+            for (Player eachWinner: winners){
+                System.out.println("-"+ eachWinner.getName() + " with "
+                        + ((GoFishPlayer) eachWinner).getWinComb() +" books.");
+            }
+            
+            System.out.println("\n****************************************************"
+                    + "**\n\nGeneral Statistics:\n\nThe scores for all: \n ");
+            
+        }
         for (Player eachPlayer: players){
                     System.out.println("Player " + eachPlayer.getName() + " has " + ((GoFishPlayer)eachPlayer).getWinComb() + " Wins");
                 }             

@@ -57,7 +57,7 @@ public abstract class Game {
     /**
      * When the game is over, use this method to declare and display a winning player.
      */
-    public abstract Player declareWinner(ArrayList<Player> players);
+    public abstract ArrayList<Player> declareWinner(ArrayList<Player> players);
     
     public abstract void addPlayer(Player player);
 
