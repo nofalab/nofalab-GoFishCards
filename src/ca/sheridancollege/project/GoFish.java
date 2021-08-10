@@ -14,7 +14,6 @@ import java.util.Scanner;
  */
 
 public class GoFish extends Game{
-    private static final int SIZE_FISH = 52;
     private int numOfCards;
     private int numOfPlayers; 
     
@@ -32,14 +31,15 @@ public class GoFish extends Game{
                 + "continue until the end?\ncostumize ? Y/N");
             if ((sc.next().toUpperCase().charAt(0) == 'Y')){
                 System.out.println("Please enter the number of books limit:");
-                    booksLimit = validatedNumOfBooks(sc);            
+                booksLimit = GeneUtilities.numValidator(sc, 1, 13);
+                    
             } 
-          
-        this.numOfPlayers = validatedNumOfPlayers(sc);
+        System.out.println("Please enter number of players: ");
+        this.numOfPlayers = GeneUtilities.numValidator(sc, 2, 7);
         this.numOfCards = numOfCardsCalculator(numOfPlayers);
         playersAdding(sc, numOfPlayers, this);
-        new GroupOfCardsFish(SIZE_FISH);
-        new CardsOnGround(0);
+        GroupOfCardsFish.getTheOnlyDeck();
+        //CardsOnGround GR = CardsOnGround.getCardsOnGroundObj(); not req, Singleton
         dealCardsToPlayers(); 
         giveTurns(sc, booksLimit);
 
@@ -54,49 +54,7 @@ public class GoFish extends Game{
         return 0;
     }
     
-    //getting valid num of players
-    public static int validatedNumOfPlayers(Scanner sc){
-        int num = 0;
-        String strNum;
-        
-        do {
-            System.out.println("Please enter number of players: ");
-            strNum = sc.next();
-            if (strNum.matches("-?\\d+")){
-                num = Integer.parseInt(strNum);
-                if (num >=2 && num <=7){
-                    return num;
-                } 
-                else 
-                    System.out.print("Game can not be played with less than 2 "
-                            + "or more than 7 players, please try again\n");
-            } else
-                System.out.print("number of players can not be letters\n");
-        }while (!strNum.matches("-?\\d+") || num<2 || num>7 );
-        return 0;
-
-    }
     
-    //getting valid num of books limit
-    public static int validatedNumOfBooks(Scanner sc){
-        int num = 0;
-        String strNum;
-        
-        do {
-            strNum = sc.next();
-            if (strNum.matches("-?\\d+")){
-                num = Integer.parseInt(strNum);
-                if (num >=1 && num <=13){
-                    return num*4;
-                } 
-                else 
-                    System.out.print("number of books allowed from 1 to 13, try again\n");
-            } else
-                System.out.print("number of books limit can not be letters, try a gain (1-13) \n");
-        }while (!strNum.matches("-?\\d+") || num<1 || num>13 );
-        return 0;
-
-    }
     
      //registering players into game with checking unique names 
       public static void playersAdding(Scanner sc, int numOfPlayers, Game newGame){
@@ -143,7 +101,7 @@ public class GoFish extends Game{
         getPlayers().add(player);
     }
 
-    void dealCardsToPlayers() {
+    public void dealCardsToPlayers() {
         this.getPlayers().forEach(eachPlayer -> {
             eachPlayer.playerDeal(numOfCards);
             ((GoFishPlayer)eachPlayer).checkWinCombinations();
@@ -151,13 +109,13 @@ public class GoFish extends Game{
 
     public void giveTurns(Scanner sc, int booksLimit){
         int turnsCounter = 0; 
-        while(CardsOnGround.getCardsOnGround().size() <booksLimit){
+        while(CardsOnGround.getCardsOnGroundObj().getCards().size() <booksLimit){
             for (Player eachPlayer: getPlayers()){
-                if (CardsOnGround.getCardsOnGround().size()>=booksLimit)
+                if (CardsOnGround.getCardsOnGroundObj().getCards().size()>=booksLimit)
                     break;
                 eachPlayer.play(this, sc, turnsCounter, booksLimit);
                 //((GoFishPlayer)eachPlayer).checkWinCombinations();
-                System.out.println(CardsOnGround.getCardsOnGround().size() + " Cards on ground are currently\n" + CardsOnGround.getCardsOnGround());
+                System.out.println(CardsOnGround.getCardsOnGroundObj().getCards().size() + " Cards on ground are currently\n" + CardsOnGround.getCardsOnGroundObj().getCards());
                 
                 
                System.out.println("wins are " + ((GoFishPlayer)eachPlayer).getWinComb());

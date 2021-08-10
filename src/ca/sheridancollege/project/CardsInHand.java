@@ -24,16 +24,10 @@ class CardsInHand extends GroupOfCards{
        
        for(int i=0; i<getSize(); i++){
            
-          getCards().add(GroupOfCardsFish.getDeck().get(i));
-          GroupOfCardsFish.getDeck().remove(i);
+          getCards().add(GroupOfCardsFish.getTheOnlyDeck().getCards().get(i));
+          GroupOfCardsFish.getTheOnlyDeck().getCards().remove(i);
             
                
            }
-       }
-
-    
-        
-    
-    
-    
+       }  
 }

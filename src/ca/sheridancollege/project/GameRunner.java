@@ -41,7 +41,7 @@ public class GameRunner {
      
         int k=1;
         System.out.println("\nCompleted books are : \n");
-        for (Card eachCard: CardsOnGround.getCardsOnGround()){
+        for (Card eachCard: CardsOnGround.getCardsOnGroundObj().getCards()){
                         System.out.println(k++ + " on Ground "+ eachCard);
 
         }
@@ -54,7 +54,7 @@ public class GameRunner {
         });
         
         System.out.println("\nRemaining number of cards in the pile is: "
-                + "" + GroupOfCardsFish.getDeck().size() + "\n\nWE PROUDLY "
+                + "" + GroupOfCardsFish.getTheOnlyDeck().getCards().size() + "\n\nWE PROUDLY "
                         + "MADE THIS GAME FROM SCRATCH, THANK YOU PROFESSOR!");
 
         

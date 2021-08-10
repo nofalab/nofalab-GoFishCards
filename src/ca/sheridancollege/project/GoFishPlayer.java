@@ -53,7 +53,7 @@ class GoFishPlayer extends Player{
 
             //method to handle if player chosses invalid entry, Ex, if total 4 
             //players, 1 to 3 only will be passed    
-            playerToAsk = whoToAskChecker (sc, players);
+            playerToAsk = (GeneUtilities.numValidator(sc, 1, players.size()-1))-1;
             
             //code to ensure removing the current player from the sequence and rearrange
             if (playerToAsk>= currentIndex)
@@ -97,28 +97,34 @@ class GoFishPlayer extends Player{
             
             //method to handle if player chosses invalid entry for value, 1-13 only 
             
-            Value choice = Value.values()[valueChecker (sc)];
+            Value choice = Value.values()[GeneUtilities.numValidator(sc, 1, 13)-1];
 
             ArrayList<Card> otherPlayerCards = ((GoFishPlayer)players.get(playerToAsk)).getCardsInHand().getCards();
             
             //iterating through opponent cards to check for match. Then add the 
             //collected cards into this player and remove from opponent 
             Iterator<Card> it = otherPlayerCards.iterator();
+            int cardsGained = 0;
             while(it.hasNext()){
                 Card eachCard = it.next();
+                
                 if(((StandardCard)eachCard).getValue().equals(choice)){
                    this.getCardsInHand().getCards().add(eachCard);
                    it.remove();
                    goFish = false;
+                   cardsGained++;
                 }
             }
-                                
+                if (cardsGained>0)
+                   System.out.println("great, you made it, you gained " + cardsGained + " "
+                           + "card(s) of rank " + choice.name() + ", keep going!");
+               
                 this.checkWinCombinations();
                         
             //if no match, then its Go fish and this player is asked to pick 
             //card from pile if any left 
             if (goFish){
-                if (!GroupOfCardsFish.getDeck().isEmpty()){
+                if (!GroupOfCardsFish.getTheOnlyDeck().getCards().isEmpty()){
                 System.out.println("Player " + getName() + " You didn't guess "
                         + "valid number in other player's cards, so you need to"
                         + " press enter to draw from pile");
@@ -127,10 +133,10 @@ class GoFishPlayer extends Player{
                 sc.nextLine();
                 if (sc.nextLine().matches("")){};
                 
-                Card drawPile = GroupOfCardsFish.getDeck().get(0);
+                Card drawPile = GroupOfCardsFish.getTheOnlyDeck().getCards().get(0);
                 System.out.println("Player " + getName() + ": you picked " + drawPile.toString());
                 this.getCardsInHand().getCards().add(drawPile);
-                GroupOfCardsFish.getDeck().remove(drawPile);
+                GroupOfCardsFish.getTheOnlyDeck().getCards().remove(drawPile);
                 
                 //if player picks from pile matches his original rank he get to keep turn
                 if (((StandardCard)drawPile).getValue().equals(choice)){
@@ -142,7 +148,7 @@ class GoFishPlayer extends Player{
 
             }
             turnsCounter++;
-            if (CardsOnGround.getCardsOnGround().size() >= booksLimit){
+            if (CardsOnGround.getCardsOnGroundObj().getCards().size() >= booksLimit){
                 break;
             }
         }while (!goFish);    
@@ -186,7 +192,7 @@ class GoFishPlayer extends Player{
                 k=0;
                 boolean repeated = false;
 
-                for (Card eachCardGr: CardsOnGround.getCardsOnGround()){
+                for (Card eachCardGr: CardsOnGround.getCardsOnGroundObj().getCards()){
                     if (((StandardCard)eachCardGr).getValue().equals(((StandardCard)thoseCardsCopy.get(i)).getValue()) ){
                         repeated = true;
                         break;
@@ -204,60 +210,17 @@ class GoFishPlayer extends Player{
                 winComb ++;
                 tempContainer.add(thoseCardsCopy.get(i));
                 thoseCards.removeAll(tempContainer);
-                CardsOnGround.getCardsOnGround().addAll(tempContainer);
+                CardsOnGround.getCardsOnGroundObj().getCards().addAll(tempContainer);
+                }
             }
+  
             tempContainer.clear();
             }   
-    }
-
-    /**
-     * @return the winComb
-     */
-    public int getWinComb() {
+     
+    public int getWinComb(){
         return winComb;
     }
-
-    public static int whoToAskChecker (Scanner sc, ArrayList<Player> players){
-        int num = 0;
-        String strNum;
-        
-        do {
-            strNum = sc.next();
-            if (strNum.matches("-?\\d+")){
-                num = Integer.parseInt(strNum);
-                if (num >=1 && num <=players.size()-1){
-                    return num-1;
-                } 
-                else 
-                    System.out.print("Invalid entry, please enter again with "
-                            + "number between 1 and " + (players.size()-1) + "\n");
-            } else
-                System.out.print("Your choice can not be letters. Try again, come on!\n");
-        }while (!strNum.matches("-?\\d+") || !(num >=1 && num <=players.size()-1) );
-        return 0;
-
-    }
-    
-        public static int valueChecker (Scanner sc){
-        int num = 0;
-        String strNum;
-        
-        do {
-            strNum = sc.next();
-            if (strNum.matches("-?\\d+")){
-                num = Integer.parseInt(strNum);
-                if (num >=1 && num <=13){
-                    return num-1;
-                } 
-                else 
-                    System.out.print("Invalid entry, please enter again with "
-                            + "number between 1 and 13 \n");
-            } else
-                System.out.print("Your choice can not be letters. Try again, come on!\n");
-        }while (!strNum.matches("-?\\d+") || !(num >=1 && num <=13) );
-        return 0;
-
-    } 
+  
 }
 
 

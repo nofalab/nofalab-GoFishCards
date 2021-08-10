@@ -48,9 +48,14 @@ public abstract class Player {
     /**
      * The method to be overridden when you subclass the Player class with your specific type of Player and filled in
      * with logic to play your game.
+     * @param newFishGame
+     * @param sc
+     * @param turnsCounter
+     * @param booksLimit
      */
     public abstract void play(Game newFishGame, Scanner sc, int turnsCounter, int booksLimit);
     
+    @Override
     public abstract String toString();
 
     public abstract void playerDeal(int numOfCards);
