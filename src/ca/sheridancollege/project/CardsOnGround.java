@@ -12,9 +12,13 @@ import java.util.ArrayList;
  * @author Abdallah Nofal, Victor Vieira, Jacob Maltby, Imanuel Chatur
  */
 public class CardsOnGround extends GroupOfCards{
-    private static ArrayList<Card> cardsOnGround = new ArrayList<>();
+        private static final int SIZE_GR = 0;
+
+    //We apply singleton pattern as we only need to have only one object 
+
+    private static CardsOnGround cardsOnGround = null;
     
-    public CardsOnGround(int size) {
+    private CardsOnGround(int size){
         super(size);
 
     }
@@ -24,7 +28,11 @@ public class CardsOnGround extends GroupOfCards{
         
     }
     
-    public static ArrayList<Card> getCardsOnGround() {
+    public static CardsOnGround getCardsOnGroundObj() {
+        if (cardsOnGround == null) {
+            cardsOnGround = new CardsOnGround(SIZE_GR);
+
+        }
         return cardsOnGround;
     }
 }

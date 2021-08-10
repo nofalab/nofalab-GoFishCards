@@ -39,22 +39,7 @@ public class GoFishTest {
     public void tearDown() {
     }
 
-    /**
-     * Test of play method, of class GoFish.
-     */
-//    @Test
-//    public void testPlay() {
-//        System.out.println("play");
-//        Scanner sc = null;
-//        GoFish instance = null;
-//        instance.play(sc);
-//        // TODO review the generated test code and remove the default call to fail.
-//        fail("The test case is a prototype.");
-//    }
-//
-//    /**
-//     * Test of numOfCardsCalculator method, of class GoFish.
-//     */
+  
     @Test
     public void testNumOfCardsCalculatorGood() {
         System.out.println("numOfCardsCalculatorGood");
@@ -88,6 +73,40 @@ public class GoFishTest {
         //fail("The test case is a prototype.");
     }
 
+    
+    
+      /**
+     * Test of play method, of class GoFish.
+     */
+//    @Test
+//    public void testPlay() {
+//        System.out.println("play");
+//        Scanner sc = null;
+//        GoFish instance = null;
+//        instance.play(sc);
+//        // TODO review the generated test code and remove the default call to fail.
+//        fail("The test case is a prototype.");
+//    }
+//
+//    /**
+//     * Test of numOfCardsCalculator method, of class GoFish. 2 returns 7, 3 to 7 returns 5  
+//     */
+    /**
+     * Test of declareWinner method, of class GoFish. 
+     */
+//    @Test
+//    public void testDeclareWinner() {
+//        System.out.println("declareWinner");
+//        ArrayList<Player> players = null;
+//        GoFish instance = null;
+//        Player expResult = null;
+//        Player result = instance.declareWinner(players);
+//        assertEquals(expResult, result);
+//        // TODO review the generated test code and remove the default call to fail.
+//        fail("The test case is a prototype.");
+//    }
+//
+//    /**
 
 //    /**
 //     * Test of validatedNumOfPlayers method, of class GoFish.
@@ -131,22 +150,7 @@ public class GoFishTest {
 //        fail("The test case is a prototype.");
 //    }
 //
-//    /**
-//     * Test of declareWinner method, of class GoFish.
-//     */
-//    @Test
-//    public void testDeclareWinner() {
-//        System.out.println("declareWinner");
-//        ArrayList<Player> players = null;
-//        GoFish instance = null;
-//        Player expResult = null;
-//        Player result = instance.declareWinner(players);
-//        assertEquals(expResult, result);
-//        // TODO review the generated test code and remove the default call to fail.
-//        fail("The test case is a prototype.");
-//    }
-//
-//    /**
+//    
 //     * Test of addPlayer method, of class GoFish.
 //     */
 //    @Test

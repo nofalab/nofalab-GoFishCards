@@ -11,12 +11,13 @@ import java.util.ArrayList;
  */
 
 public class GroupOfCardsFish extends GroupOfCards{
-    
-    //deck cards, set to static to call it by class name throught project
-    private static ArrayList<Card> deck = new ArrayList<>();
+    private static final int SIZE_FISH = 52;
+
+    //We apply singleton pattern as we only need to have only one deck in the game 
+    private static GroupOfCardsFish deck = null;
 
     //constructor to creat, shuffle the deck
-    public GroupOfCardsFish(int size) {
+    private GroupOfCardsFish(int size) {
         super(size);
         cardGenerator();
         shuffle();
@@ -32,11 +33,13 @@ public class GroupOfCardsFish extends GroupOfCards{
                
            }
        }
-       deck = getCards();
     }
     
     //getting deck cards, set to static to call it by class name throught project
-    public static ArrayList<Card> getDeck() {
+    public static GroupOfCardsFish getTheOnlyDeck() {
+        if (deck==null){
+            deck = new GroupOfCardsFish(SIZE_FISH); 
+        }
         return deck;
     }
 
